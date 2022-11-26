@@ -31,7 +31,8 @@
     "svelte-i18n": "^3.3.0",
     "svelte-spinner": "^2.0.2",
     "textalive-app-api": "^0.2.2",
-    "three": "~0.111.0"
+    "three": "~0.111.0",
+    "wanakana": "^5.0.2"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",

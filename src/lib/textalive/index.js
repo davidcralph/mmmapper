@@ -1,6 +1,8 @@
 import { textaliveStore } from '../../store';
 
 import { Player } from 'textalive-app-api';
+import { toRomaji, isKana } from 'wanakana';
+import { kanjiToHiragana } from '../kanjiapi';
 
 class TextAliveControl {
   // manager;
@@ -85,6 +87,15 @@ class TextAliveManager {
       });
     }
 
+    const convertKana = (input) => {
+      if (isKana(input)) {
+        return toRomaji(input);
+      } else {
+        const hiragana = kanjiToHiragana(input);
+        return toRomaji(hiragana);
+      }
+    }
+
     player.addListener({
       /* https://developer.textalive.jp/packages/textalive-app-api/interfaces/playerapplistener.html */
       onAppReady: (app) => {
@@ -110,6 +121,7 @@ class TextAliveManager {
         const watchChar = () => {
           c.animate = animateChar;
           c = c.next;
+          c._data.char = convertKana(c._data.char);
           !!c && setTimeout(watchChar, 0);
         };
         watchChar();
